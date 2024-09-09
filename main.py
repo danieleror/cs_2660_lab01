@@ -23,14 +23,12 @@ def main():
             data = menu_file.readline().strip().split(',')
             menus[menu_name]["access"][data[0]] = data[1].split(' ')  # adds list that contains 'r', 'w', or both
 
-    print(user_info)
-    print(menus)
     print("Welcome to Dan's Coffee Shop! Please enter your username: ")
     username = input()
-    while username not in user_info:
+    while username not in user_info:  # repeatedly asks for a username until one has been found
         username = input("Username not found, please try again: ")
     password = input("Hi " + username + ", please enter your password: ")
-    while password != user_info[username]["password"]:
+    while password != user_info[username]["password"]:  # asks for password until the correct one is entered
         password = input("Incorrect password, please try again: ")
     print("Login successful... see menu options below:")
     for option in menus:
@@ -39,15 +37,14 @@ def main():
     menu_selected = input("Please enter a menu you'd like to access: ")
     valid_input = False
     while not valid_input:
-        if menu_selected not in menus:
+        if menu_selected not in menus:  # event in which user enters a menu that does not exist
             menu_selected = input("Input does not match menu options, please try again: ")
-        elif 'r' not in menus[menu_selected]['access'][user_info[username]['access']]:
+        elif 'r' not in menus[menu_selected]['access'][user_info[username]['access']]:  # user does not have access
             menu_selected = input("You are not authorized to access this menu.\n"
                                   "Please select a different one or contact your administrator:")
         else:
-            valid_input = True
-    print("end")
-
+            valid_input = True  # user has selected a menu that exists and has proper access to, so the loop terminates
+    print("You have successfully accessed the " + menu_selected + " menu. This program will now terminate...")
 
 
 if __name__ == '__main__':
